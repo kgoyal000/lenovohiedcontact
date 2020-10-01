@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LenevohiedContact</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+		<link rel="stylesheet" href="{% static 'css/countrySelect.css' %}">
+    <link rel="stylesheet" href="{% static 'css/demo.css' %}">
+    <script type="text/javascript">
+      window.onload = function() {
+          document.getElementById('form').action = get_action();
+      }
+  
+      function get_action() {
+          return '/post'+window.location.pathname;
+      }
+  </script>
+    <style>
+      .flag-dropdown{
+        color: black;
+      }
+      .country-select.inside{
+        width: 100%;
+      }
+        body, html {
+            font-size: 0.9em;
+            background-image: url("{% static 'background.png' %}");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+          }
+          .bg {
+            height: 100%;
+          }
+          .logo{
+            width: 25vw;
+          }
+          label{
+            font-weight: bold;
+          }
+
+          .my-but{
+            font-size: 1.25rem;
+          }
+
+          @media all and (max-width: 1200px) { /* screen size until 1200px */
+            body {
+                font-size: 1.5em; /* 1.5x default size */
+            }
+        }
+        @media all and (max-width: 1000px) { /* screen size until 1000px */
+            body {
+                font-size: 1.2em; /* 1.2x default size */
+                }
+            }
+        @media all and (max-width: 500px) { /* screen size until 500px */
+            body {
+                font-size: 0.8em; /* 0.8x default size */
+                margin: 0;
+                }
+
+                html,body{
+                  height: 100%;
+                }
+                h2{
+                  font-size: 1.2rem;
+                  margin-bottom: 20px !important;
+                }
+                h6{
+                  font-size: .8rem;
+                }
+                .my-but{
+                  font-size: 1rem;
+                }
+                small{
+                  font-size: 90%;
+                }
+            }
+    </style>
+</head>
+<body>
+    <div class="bg text-center text-white">
+      <div class="container">
+      <img src="{% static 'logo.png' %}" alt="logo" class="logo my-4">
+      <h2 class="heading mb-2">Welcome to the Lenovo VR Experience</h2>
+      <h6>Enter your contact information below to continue to explore the world of Lenovo Educause.</h6>
+      <form action="/post/" method="POST" class="mt-4" id="form">
+        {% csrf_token %} 
+      <label for="fname" class="float-left my-2">First Name</label>
+      <input type="text" required class="form-control" id="fname" name="fname">
+      <label for="lname" class="float-left my-2 mt-3">Last Name</label>
+      <input type="text" required class="form-control" id="lname" name="lname">
+      <label for="institution" class="float-left my-2 mt-3">Institution</label>
+      <input type="text" required class="form-control" id="institution" name="institution">
+      <label for="title" class="float-left my-2 mt-3">Title</label>
+      <input type="text" required class="form-control" id="title" name="title">
+      <label for="email" class="float-left my-2 mt-3">Email</label>
+      <input type="text" required class="form-control" id="email" name="email">
+      <label for="country" class="float-left my-2 mt-3">Country</label>
+      <div class="form-item">
+				<input id="country_selector" name="country" class="form-control mb-3" type="text">
+				<label for="country_selector" style="display:none;">Select a country here...</label>
+			</div>
+			<div class="form-item" style="display:none;">
+				<input type="text" id="country_selector_code" name="country_selector_code" data-countrycodeinput="1" readonly="readonly" placeholder="Selected country code will appear here" />
+				<label for="country_selector_code">...and the selected country code will be updated here</label>
+			</div>
+      <button class="btn btn-success mt-5 my-but" type="submit" style="background-color: #69BD4B; font-weight: bold">ENTER LENOVO VR EXPERIENCE</button>
+    </form>
+    </div>
+    </div>
+    	<!-- Load jQuery from CDN so can run demo immediately -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="{% static 'js/countrySelect.js' %}"></script>
+		<script>
+			$("#country_selector").countrySelect({
+				defaultCountry: "us",
+				// onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+				//responsiveDropdown: true,
+				preferredCountries: ['ca', 'gb', 'us']
+			});
+		</script>
+</body>
+</html>
